@@ -21,7 +21,7 @@
 	
 	<p>
 		
-		<a href="<s:url action='save'/>">ABM</a>
+		<a href="<s:url action='personas'/>">ABM</a>
 	
 	</p>
 	

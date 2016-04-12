@@ -19,19 +19,19 @@
 </head>
 <body>
 
-	<div class="container">
-	<h2>Alta</h2>
+	<div class="container">	
+		<h2>Alta</h2>
 		<s:form action="save">
 			<s:textfield label="Nombre" name="name"></s:textfield>
 			<s:textfield label="Edad" name="age"></s:textfield>
-			<s:radio label="Genero" name="gender" 
-			list="#{'Femenino':'Femenino','Masculino':'Masculino'}" />
+			<s:radio label="Genero" name="gender"
+				list="#{'Femenino':'Femenino','Masculino':'Masculino'}" />
 			<s:submit></s:submit>
 			<s:actionerror />
 		</s:form>
-	
 
-	
+
+
 		<table>
 			<tr>
 				<th>ID</th>
@@ -48,25 +48,25 @@
 				</tr>
 			</s:iterator>
 		</table>
-		
+
 		<h2>Baja</h2>
 		<s:form action="delete">
-		<s:textfield label="Id" name="id"></s:textfield>
-		<s:actionerror />
-		<s:submit></s:submit>
+			<s:textfield label="Id" name="id"></s:textfield>
+			<s:actionerror />
+			<s:submit></s:submit>
 		</s:form>
-		
+
 		<h2>Modificacion</h2>
 		<s:form action="edit">
-		<s:textfield label="Id" name="id"></s:textfield>
-		<s:textfield label="Nombre" name="name"></s:textfield>
-		<s:textfield label="Edad" name="age"></s:textfield>
-		<s:radio label="Genero" name="gender"
-		list="#{'Femenino':'Femenino','Masculino':'Masculino'}" />
-		<s:actionerror />
-		<s:submit></s:submit>
+			<s:textfield label="Id" name="id"></s:textfield>
+			<s:textfield label="Nombre" name="name"></s:textfield>
+			<s:textfield label="Edad" name="age"></s:textfield>
+			<s:radio label="Genero" name="gender"
+				list="#{'Femenino':'Femenino','Masculino':'Masculino'}" />
+			<s:actionerror />
+			<s:submit></s:submit>
 		</s:form>
-		
+
 	</div>
 
 
