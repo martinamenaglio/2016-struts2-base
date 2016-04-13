@@ -64,10 +64,14 @@ public class PersonaAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	
 	public String save(){ 
 		personas = PersistentManager.getInstance(); 
 		int edad = 0; 
-		 
+		long idUltimo ;//id de la ultima persona agregada
+		long idNuevo = 0; //id de la persona agregada
+		int ultimaUbicacion ;
+		Persona ultimaPersona;
 		try{ 
 		edad = Integer.parseInt(age); 
 		}catch(Exception e){ 
@@ -76,9 +80,16 @@ public class PersonaAction extends ActionSupport {
 		} 
 		 
 		try{
-			Persona p = new Persona(personas.size(), name, edad, gender); //creo la persona
+			if (personas.isEmpty()){
+				idNuevo=1;
+			}else{
+			ultimaUbicacion = personas.size() - 1;
+			ultimaPersona=personas.get(ultimaUbicacion); //ultima persona que fue agregada
+			idUltimo=ultimaPersona.getId();
+			idNuevo= idUltimo +1;
+			}
+			Persona p = new Persona(idNuevo, name, edad, gender); //creo la persona
 			personas.add(p);//agrego una persona a la lista personas
-			//System.out.println(personas.size());
 		}catch(Exception e){
 			addActionError("Ocurrio un error al crear la persona");
 			return ERROR;
@@ -90,17 +101,16 @@ public class PersonaAction extends ActionSupport {
 	
 	public String delete(){
 		personas = PersistentManager.getInstance();
-		int idElegido=0;
+		long idElegido;
 		try{ 
 			idElegido = Integer.parseInt(id); 
 			}catch(Exception e){ 
 			addActionError("Ocurrió un error"); 
 			return ERROR; 
 			} 
-		//System.out.println(personas.size());
 		
 		try{
-			personas.remove(idElegido);
+			personas.removeIf(persona -> persona.getId() == idElegido);
 		}catch(Exception e){
 			addActionError("Ocurrio un error al eliminar la persona");
 			return ERROR;
@@ -111,7 +121,7 @@ public class PersonaAction extends ActionSupport {
 	
 	public String edit(){
 		personas = PersistentManager.getInstance();
-		int idElegido=0;
+		long idElegido;
 		int edad = 0;
 		try{ 
 			idElegido = Integer.parseInt(id); 
@@ -120,13 +130,15 @@ public class PersonaAction extends ActionSupport {
 			addActionError("Ocurrió un error"); 
 			return ERROR; 
 			} 
-			//System.out.println(personas.size());
 			
 		try{
-			Persona p = personas.get(idElegido);
-			p.setGender(getGender());
-			p.setName(getName());
-			p.setAge(edad);
+			for(Persona p:personas){
+				if (p.getId() == idElegido) {			
+					p.setGender(getGender());
+					p.setName(getName());
+					p.setAge(edad);					
+				}
+			}
 		}catch(Exception e){
 			addActionError("Ocurrio un error al modificar la persona");
 			return ERROR;
