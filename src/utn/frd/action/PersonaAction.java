@@ -64,6 +64,12 @@ public class PersonaAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	private void  clear(){
+		setId("");
+		setGender("");
+		setName("");
+		setAge("");	
+	}
 	
 	public String save(){ 
 		personas = PersistentManager.getInstance(); 
@@ -90,6 +96,7 @@ public class PersonaAction extends ActionSupport {
 			}
 			Persona p = new Persona(idNuevo, name, edad, gender); //creo la persona
 			personas.add(p);//agrego una persona a la lista personas
+			clear();
 		}catch(Exception e){
 			addActionError("Ocurrio un error al crear la persona");
 			return ERROR;
@@ -111,6 +118,7 @@ public class PersonaAction extends ActionSupport {
 		
 		try{
 			personas.removeIf(persona -> persona.getId() == idElegido);
+			clear();
 		}catch(Exception e){
 			addActionError("Ocurrio un error al eliminar la persona");
 			return ERROR;
@@ -137,8 +145,9 @@ public class PersonaAction extends ActionSupport {
 					p.setGender(getGender());
 					p.setName(getName());
 					p.setAge(edad);					
-				}
+				}				
 			}
+			clear();
 		}catch(Exception e){
 			addActionError("Ocurrio un error al modificar la persona");
 			return ERROR;
